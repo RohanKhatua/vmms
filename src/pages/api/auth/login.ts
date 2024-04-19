@@ -26,6 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         // Create JWT Token
+
+        // Our JWT payload consists of the user's id and email
         const token = jwt.sign(
             { userId: user.id, email: user.email },
             JWT_SECRET,
