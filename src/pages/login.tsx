@@ -1,39 +1,27 @@
-import { useState } from "react";
-import Router from "next/router";
-import Cookie from "js-cookie";
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+import { CommandIcon, GithubIcon } from "lucide-react"
+import LoginPage from "@/components/login-form"
 
-    const handleLogin = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        const res = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-        if (res.ok) {
-            Cookie.set('token', data.token, { expires: 1 });
-            Router.push('/dashboard');
-        } else {
-            setError(data.error || 'Something went wrong');
-        }
-    };
-
+export default function Component() {
     return (
-        <form onSubmit={handleLogin}>
-            <input required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit">Login</button>
-            {error && <p>{error}</p>}
-        </form>
-    );
+        <div className="min-h-screen flex">
+            <div className="flex-1 flex flex-col justify-between p-8 bg-zinc-900">
+                <div className="flex flex-row items-center gap-5">
+                    <CommandIcon className="h-6 w-6 text-white" />
+                    <h1 className="text-white text-2xl">Visit Inc.</h1>
+                </div>
+                <div className="text-white">
+                    <blockquote>
+                        For Meetings that cannot be emails.
+                    </blockquote>
+                </div>
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center bg-black">
+                <LoginPage></LoginPage>
+            </div>
+        </div>
+    )
 }
-
-export default LoginPage;

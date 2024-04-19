@@ -10,6 +10,8 @@ export default function Home() {
   useEffect(() => {
     if (!isAuthenticated()) {
       Router.push("/login");
+
+      // login refers to the joint page for logging in and signing up
     }
   }, []);
 
