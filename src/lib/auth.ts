@@ -1,5 +1,8 @@
-import Cookie from "js-cookie";
+"use client";
+import Cookies from "js-cookie";
 
 export function isAuthenticated() {
-    return !!Cookie.get('token');
+    console.log('Checking for cookies')
+    console.log(Cookies.get('token'));
+    return !!Cookies.get('token');
 }

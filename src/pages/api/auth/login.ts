@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         );
 
         // Set Cookie
-        res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=${2 * 60 * 60}; Secure; SameSite=Strict`);
+        // res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=${2 * 60 * 60}; SameSite=Strict`);
 
         res.status(200).json({ message: "Login Successful", token });
     } catch (error) {

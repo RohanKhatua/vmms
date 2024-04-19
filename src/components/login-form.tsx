@@ -1,6 +1,7 @@
+"use client";
 import { useState } from "react";
 import Router from "next/router";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
@@ -23,10 +24,11 @@ function LoginPage() {
             body: JSON.stringify({ email, password })
         });
 
+        console.log(res);
         const data = await res.json();
         if (res.ok) {
-            Cookie.set('token', data.token, { expires: 1 });
-            Router.push('/dashboard');
+            Cookies.set('token', data.token, { expires: 1 });
+            Router.push('/');
         } else {
             setError(data.error || 'Something went wrong');
         }
@@ -44,7 +46,7 @@ function LoginPage() {
 
         const data = await res.json();
         if (res.ok) {
-            Router.push('/login');
+            Router.push('/');
         } else {
             setError(data.error || 'Something went wrong');
         }
@@ -58,10 +60,10 @@ function LoginPage() {
                     {error && <Alert className="mb-6 bg-black text-white border-0">
                         <AlertTitle>{error}</AlertTitle>
                     </Alert>}
-                    <div className="flex flex-col gap-4">
-                        <Label className="text-white">Email</Label>
+                    <div className="flex flex-col gap-4 text-white">
+                        <Label>Email</Label>
                         <Input type='email' placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
-                        <Label className="text-white">Password</Label>
+                        <Label>Password</Label>
                         <Input type='password' placeholder="password" onChange={(e) => setPassword(e.target.value)} />
                         <Button className="w-full">Sign In</Button>
                     </div>
@@ -79,14 +81,14 @@ function LoginPage() {
                     {error && <Alert className="mb-6 bg-black text-white border-0">
                         <AlertTitle>{error}</AlertTitle>
                     </Alert>}
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 text-white">
                         <Label className="text-white">Name</Label>
                         <Input type='text' placeholder="John Doe" onChange={(e) => setName(e.target.value)} />
-                        <Label className="text-white">Email</Label>
+                        <Label>Email</Label>
                         <Input type='email' placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
-                        <Label className="text-white">Password</Label>
+                        <Label>Password</Label>
                         <Input type='password' placeholder="password" onChange={(e) => setPassword(e.target.value)} />
-                        <Button className="w-full">Sign In</Button>
+                        <Button className="w-full">Sign Up</Button>
                     </div>
 
                     <p className="text-white text-center text-sm mt-6">
